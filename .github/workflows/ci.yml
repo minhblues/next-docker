@@ -23,18 +23,7 @@ jobs:
   initial:
     name: Initial
     timeout-minutes: 15
-    runs-on: [self-hosted]
-    outputs:
-      INITIAL_OUTPUT: ${{ steps.initial.outputs.INITIAL_OUTPUT }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3.5.2
-        with:
-          fetch-depth: 0
-
-      - name: 'Initial'
-        id: initial
-        run: runner_init
+    runs-on: ubuntu-latest
 
   test:
     name: Test
@@ -71,8 +60,6 @@ jobs:
     timeout-minutes: 15
     runs-on: [self-hosted, ct-runners]
     if: github.event_name == 'push'
-    env:
-      INITIAL_OUTPUT: ${{ needs.initial.outputs.INITIAL_OUTPUT }}
     needs: initial
     steps:
       - name: Checkout
