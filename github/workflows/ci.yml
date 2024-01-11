@@ -52,6 +52,6 @@ jobs:
           script: |
             docker login ghcr.io -u $GITHUB_USERNAME -p $GITHUB_TOKEN
             docker pull ghcr.io/minhblues/next-docker/web-admin:latest
-            docker stop containername
+            docker stop web-admin
             docker system prune -f
-            docker run --name containername -dit -p 3000:3000 ghcr.io/minhblues/next-docker/web-admin:latest
+            docker run --name web-admin --restart unless-stopped -dit -p 3000:3000 ghcr.io/minhblues/next-docker/web-admin:latest
