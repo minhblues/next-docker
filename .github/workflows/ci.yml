@@ -68,7 +68,6 @@ jobs:
       
       - name: Dockerize
         run: |
-          runner_utils
           docker build -t $DOCKER_IMAGE .
           docker images --format "{{.Repository}}:{{.Tag}} {{.Size}}" | grep $DOCKER_IMAGE
           docker push $DOCKER_IMAGE
